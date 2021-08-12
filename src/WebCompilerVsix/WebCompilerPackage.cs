@@ -21,8 +21,9 @@ namespace WebCompilerVsix
     [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class WebCompilerPackage : AsyncPackage
     {
-        public const string Version = "1.4.167";
-        public static DTE2 _dte;
+        public const string Version = "1.13.001";
+        private static DTE2 __dte;
+        public static DTE2 _dte => __dte ?? (__dte = GetGlobalService(typeof(DTE)) as DTE2);
         public static Package Package;
         private SolutionEvents _solutionEvents;
         private BuildEvents _buildEvents;
@@ -31,7 +32,7 @@ namespace WebCompilerVsix
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            _dte = GetService(typeof(DTE)) as DTE2;
+            //_dte = GetService(typeof(DTE)) as DTE2;
             Package = this;
 
             Logger.Initialize(this, Constants.VSIX_NAME);

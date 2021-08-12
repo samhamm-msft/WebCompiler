@@ -8,7 +8,8 @@ namespace WebCompiler
 {
     class StylusCompiler : ICompiler
     {
-        private static Regex _errorRx = new Regex(@"(?<severity>Error|Warning): (?<file>.+):(?<line>[0-9]+):(?<column>[0-9]+).+^(?=[^\s])(?<message>([^\r\n]+))", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline);
+        //private static Regex _errorRx = new Regex(@"(?<severity>Error|Warning): (?<file>.+):(?<line>[0-9]+):(?<column>[0-9]+).+^(?=[^\s])(?<message>([^\r\n]+))", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline);
+        private static Regex _errorRx = new Regex(@"(?<severity>Error|Warning): (?<file>.+.styl):(?<line>[0-9]+):(?<column>[0-9]+)(?<message>.+)", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.Singleline);
         private string _path;
         private string _output = string.Empty;
         private string _error = string.Empty;

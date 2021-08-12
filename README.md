@@ -7,11 +7,9 @@ files.
 
 Download the extension at the
 [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/3b329021-cd7a-4a01-86fc-714c2d05bb6c)
-or get the
-[nightly build](http://vsixgallery.com/extension/148ffa77-d70a-407f-892b-9ee542346862/)
 
 See the
-[changelog](https://github.com/madskristensen/WebCompiler/blob/master/CHANGELOG.md)
+[changelog](https://github.com/failwyn/WebCompiler/blob/master/CHANGELOG.md)
 for changes and roadmap.
 
 ### Features
