@@ -3,8 +3,6 @@
 A Visual Studio extension that compiles LESS, Sass Stylus, JSX, ES6 and CoffeeScript
 files.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/kyk8vpst641r2n0r?svg=true)](https://ci.appveyor.com/project/madskristensen/webcompiler)
-
 Download the extension at the
 [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/3b329021-cd7a-4a01-86fc-714c2d05bb6c)
 
