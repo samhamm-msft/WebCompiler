@@ -120,7 +120,7 @@ namespace WebCompiler
             else if (options.StrictMath)
                 arguments += " --math=strict-legacy";
 
-            if (options.IECompat)
+            //if (options.IECompat)
                 //arguments += " --ie-compat";
 
             if (options.StrictUnits)
