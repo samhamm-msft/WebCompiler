@@ -135,7 +135,7 @@ namespace WebCompilerVsix.Commands
                 if (question == DialogResult.No)
                     return;
 
-                Version version = new Version(WebCompilerPackage.Version);
+                Version version = null;
 
 #if DEBUG
                 version = (Version)null;
@@ -144,18 +144,18 @@ namespace WebCompilerVsix.Commands
                 {
                     try
                     {
-                        WebCompilerPackage._dte.StatusBar.Text = $"Installing {Constants.NUGET_ID} v{WebCompilerPackage.Version} NuGet package, this may take a minute...";
+                        WebCompilerPackage._dte.StatusBar.Text = $"Installing {Constants.NUGET_ID} NuGet package, this may take a minute...";
                         WebCompilerPackage._dte.StatusBar.Animate(true, vsStatusAnimation.vsStatusAnimationSync);
 
                         var installer = componentModel.GetService<IVsPackageInstaller>();
                         installer.InstallPackage(null, _project, Constants.NUGET_ID, version, false);
 
-                        WebCompilerPackage._dte.StatusBar.Text = $"Finished installing the {Constants.NUGET_ID} v{WebCompilerPackage.Version} NuGet package";
+                        WebCompilerPackage._dte.StatusBar.Text = $"Finished installing the {Constants.NUGET_ID} NuGet package";
                     }
                     catch (Exception ex)
                     {
                         Logger.Log(ex);
-                        WebCompilerPackage._dte.StatusBar.Text = $"Unable to install the {Constants.NUGET_ID} v{WebCompilerPackage.Version} NuGet package";
+                        WebCompilerPackage._dte.StatusBar.Text = $"Unable to install the {Constants.NUGET_ID} NuGet package";
                     }
                     finally
                     {
