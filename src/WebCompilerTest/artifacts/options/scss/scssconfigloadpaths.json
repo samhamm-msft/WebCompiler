@@ -5,7 +5,7 @@
 		"minify": { },
 		"includeInProject": true,
 		"options": {
-			"outputStyle": "compact"
+			"loadPaths": "/test/test.scss;/test/test2.scss"
 		}
 	}
 ]

@@ -10,23 +10,19 @@ pushd "%~dp0..\src\WebCompiler\node"
 
 echo Installing packages...
 call npm install --quiet ^
-        babel@5.8.34 ^
+        babel-cli ^
         iced-coffee-script ^
         less ^
         less-plugin-autoprefix ^
         less-plugin-csscomb ^
-        node-sass ^
+        sass ^
+        postcss@latest ^
         postcss-cli ^
         autoprefixer ^
         stylus ^
         handlebars ^
         > nul
-
-if not exist "node_modules\node-sass\vendor\win32-ia32-48" (
-    echo Copying node binding...
-    md "node_modules\node-sass\vendor\win32-ia32-48"
-    copy binding.node "node_modules\node-sass\vendor\win32-ia32-48"
-)
+call npm install --quiet > nul
 
 echo Deleting unneeded files and folders...
 del /s /q *.html > nul

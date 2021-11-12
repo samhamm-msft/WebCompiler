@@ -5,7 +5,7 @@
 		"minify": { },
 		"includeInProject": true,
 		"options": {
-			"outputStyle": "echo"
+			"autoPrefix": "test"
 		}
 	}
 ]
