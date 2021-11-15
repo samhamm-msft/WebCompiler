@@ -35,6 +35,9 @@ namespace WebCompiler
 
             if (int.TryParse(GetValue(config, "precision"), out int precision))
                 Precision = precision;
+
+            if (bool.TryParse(GetValue(config, "quietDeps"), out bool quietDeps))
+                QuietDeps = quietDeps;
         }
 
         /// <summary>
@@ -69,6 +72,18 @@ namespace WebCompiler
         /// </summary>
         [JsonProperty("precision")]
         public int Precision { get; set; } = 10;
+
+        /// <summary>
+        /// Quiet
+        /// </summary>
+        [JsonProperty("quiet")]
+        public bool Quiet { get; set; } = true;
+
+        /// <summary>
+        /// QuietDeps
+        /// </summary>
+        [JsonProperty("quietDeps")]
+        public bool QuietDeps { get; set; } = true;
     }
 
     public enum SassStyle

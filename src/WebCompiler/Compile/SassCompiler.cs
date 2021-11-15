@@ -130,6 +130,12 @@ namespace WebCompiler
             if (options.SourceMap || config.SourceMap)
                 arguments.Append(" --embed-source-map");
 
+            if (options.Quiet)
+                arguments.Append(" --quiet");
+
+            if (options.QuietDeps)
+                arguments.Append(" --quiet-deps");
+
             arguments.Append(" --precision=" + options.Precision);
             arguments.Append(" --style=" + options.Style.ToString().ToLowerInvariant());
 
