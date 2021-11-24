@@ -14,6 +14,10 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
+## 1.14.1
+- [x] SASS: Replace Node Sass with Dart Sass (#8)
+- [x] SASS: Add useNodeSass configuration option for backwards compatibility
+
 ## 1.11
 
 **2016-05-10**

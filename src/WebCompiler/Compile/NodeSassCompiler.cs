@@ -7,14 +7,14 @@ using System.Text.RegularExpressions;
 
 namespace WebCompiler
 {
-    class SassCompiler : ICompiler
+    class NodeSassCompiler : ICompiler
     {
         private static Regex _errorRx = new Regex("(?<message>.+) on line (?<line>[0-9]+), column (?<column>[0-9]+)", RegexOptions.Compiled);
         private string _path;
         private string _output = string.Empty;
         private string _error = string.Empty;
 
-        public SassCompiler(string path)
+        public NodeSassCompiler(string path)
         {
             _path = path;
         }
@@ -88,18 +88,21 @@ namespace WebCompiler
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe",
-                Arguments = $"/c \"\"{Path.Combine(_path, "node_modules\\.bin\\sass.cmd")}\" {arguments} \"{info.FullName}\" \"",
+                Arguments = $"/c \"\"{Path.Combine(_path, "node_modules\\.bin\\node-sass.cmd")}\" {arguments} \"{info.FullName}\" \"",
                 StandardOutputEncoding = Encoding.UTF8,
                 StandardErrorEncoding = Encoding.UTF8,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
             };
 
-            // Pipe output from sass to postcss if autoprefix option is set
+            // Pipe output from node-sass to postcss if autoprefix option is set
             SassOptions options = SassOptions.FromConfig(config);
             if (!string.IsNullOrEmpty(options.AutoPrefix))
             {
                 string postCssArguments = "--use autoprefixer";
+
+                if (!options.SourceMap && !config.SourceMap)
+                    postCssArguments += " --no-map";
 
                 start.Arguments = start.Arguments.TrimEnd('"') + $" | \"{Path.Combine(_path, "node_modules\\.bin\\postcss.cmd")}\" {postCssArguments}\"";
                 start.EnvironmentVariables.Add("BROWSERSLIST", options.AutoPrefix);
@@ -114,38 +117,42 @@ namespace WebCompiler
                 p.WaitForExit();
 
                 _output = stdout.Result;
-                if (!string.IsNullOrEmpty(stderr.Result))
-                {
+                // postcss outputs "√ Finished stdin (##ms)" to stderr for some reason
+                if (!stderr.Result.StartsWith("√"))
                     _error = stderr.Result;
-                }
             }
         }
 
         private static string ConstructArguments(Config config)
         {
-            var arguments = new StringBuilder();
+            string arguments = "";
 
-            SassOptions options = SassOptions.FromConfig(config);
+            NodeSassOptions options = NodeSassOptions.FromConfig(config);
 
             if (options.SourceMap || config.SourceMap)
-                arguments.Append(" --embed-source-map");
+                arguments += " --source-map-embed=true";
 
-            if (options.Quiet)
-                arguments.Append(" --quiet");
+            arguments += " --precision=" + options.Precision;
 
-            if (options.QuietDeps)
-                arguments.Append(" --quiet-deps");
+            if (!string.IsNullOrEmpty(options.OutputStyle))
+                arguments += " --output-style=" + options.OutputStyle;
 
-            arguments.Append(" --precision=" + options.Precision);
-            arguments.Append(" --style=" + options.Style.ToString().ToLowerInvariant());
+            if (!string.IsNullOrEmpty(options.IndentType))
+                arguments += " --indent-type=" + options.IndentType;
 
-            if (options.LoadPaths != null)
-            {
-                foreach (string loadPath in options.LoadPaths)
-                    arguments.Append(" --load-path=" + loadPath);
-            }
+            if (options.IndentWidth > -1)
+                arguments += " --indent-width=" + options.IndentWidth;
 
-            return arguments.ToString();
+            if (!string.IsNullOrEmpty(options.IncludePath))
+                arguments += " --include-path=" + options.IncludePath;
+
+            if (!string.IsNullOrEmpty(options.SourceMapRoot))
+                arguments += " --source-map-root=" + options.SourceMapRoot;
+
+            if (!string.IsNullOrEmpty(options.LineFeed))
+                arguments += " --linefeed=" + options.LineFeed;
+
+            return arguments;
         }
     }
 }

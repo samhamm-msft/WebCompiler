@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net4.8;netstandard2.1;netcoreapp3.1</TargetFrameworks>
-
+    <LangVersion>latest</LangVersion>
     <Title>Web Compiler</Title>
     <PackageId>BuildWebCompiler</PackageId>
 

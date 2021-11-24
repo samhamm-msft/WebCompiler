@@ -53,7 +53,7 @@ namespace WebCompilerTest
         [TestMethod, TestCategory("SCSS")]
         public void AssociateExtensionSourceFileChangedTest()
         {
-            var result = _processor.SourceFileChanged(new FileInfo("../../artifacts/scssconfig.json").FullName,new FileInfo( "../../artifacts/scss/_variables.scss").FullName, new DirectoryInfo("../../artifacts/").FullName);
+            var result = _processor.SourceFileChanged(new FileInfo("../../artifacts/scssconfig.json").FullName, new FileInfo("../../artifacts/scss/_variables.scss").FullName, new DirectoryInfo("../../artifacts/").FullName);
             Assert.AreEqual(1, result.Count<CompilerResult>());
             Assert.IsTrue(File.Exists("../../artifacts/scss/test.css"));
         }
@@ -89,6 +89,14 @@ namespace WebCompilerTest
                 string map = content.Substring(start).Trim('*', '/');
                 byte[] data = Convert.FromBase64String(map);
                 return Encoding.UTF8.GetString(data);
+            }
+
+            match = Regex.Match(content, @"sourceMappingURL=data:application/json;charset=utf-8,");
+            if (match.Success)
+            {
+                int start = match.Index + match.Length;
+                string map = content.Substring(start).Trim('*', '/');
+                return map;
             }
 
             return null;
