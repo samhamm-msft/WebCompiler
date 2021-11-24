@@ -16,6 +16,7 @@ call npm install --quiet ^
         less-plugin-autoprefix ^
         less-plugin-csscomb ^
         sass ^
+        node-sass ^
         postcss@latest ^
         postcss-cli ^
         autoprefixer ^
@@ -23,6 +24,12 @@ call npm install --quiet ^
         handlebars ^
         > nul
 call npm install --quiet > nul
+
+if not exist "node_modules\node-sass\vendor\win32-ia32-48" (
+    echo Copying node binding...
+    md "node_modules\node-sass\vendor\win32-ia32-48"
+    copy binding.node "node_modules\node-sass\vendor\win32-ia32-48"
+)
 
 echo Deleting unneeded files and folders...
 del /s /q *.html > nul

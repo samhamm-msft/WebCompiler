@@ -49,6 +49,12 @@ namespace WebCompiler
         public bool SourceMap { get; set; }
 
         /// <summary>
+        /// If true a source map file is generated for the file types that support it.
+        /// </summary>
+        [JsonProperty("useNodeSass")]
+        public bool UseNodeSass { get; set; }
+
+        /// <summary>
         /// Options specific to each compiler. Based on the inputFile property.
         /// </summary>
         [JsonProperty("options")]

@@ -10,7 +10,7 @@ namespace WebCompiler
     /// </summary>
     public static class CompilerService
     {
-        internal const string Version = "1.12.5";
+        internal const string Version = "1.12.6";
         private static readonly string _path = Path.Combine(Path.GetTempPath(), "WebCompiler" + Version);
         private static object _syncRoot = new object(); // Used to lock on the initialize step
 
@@ -49,7 +49,7 @@ namespace WebCompiler
 
                 case ".SCSS":
                 case ".SASS":
-                    compiler = new SassCompiler(_path);
+                    compiler = config.UseNodeSass ? new NodeSassCompiler(_path) : new SassCompiler(_path);
                     break;
 
                 case ".STYL":
