@@ -14,6 +14,13 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
+**2021-11-30**
+
+## 1.14.2
+- [x] Restore Babel to resolve errors with JavaScript files
+
+**2021-11-24**
+
 ## 1.14.1
 - [x] SASS: Replace Node Sass with Dart Sass (#8)
 - [x] SASS: Add useNodeSass configuration option for backwards compatibility
