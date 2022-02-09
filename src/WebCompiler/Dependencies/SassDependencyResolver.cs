@@ -49,8 +49,8 @@ namespace WebCompiler
 
                 string content = File.ReadAllText(info.FullName);
 
-                //match both <@import "myFile.scss";> and <@import url("myFile.scss");> syntax
-                var matches = Regex.Matches(content, @"(?<=@import(?:[\s]+))(?:(?:\(\w+\)))?\s*(?:url)?(?<url>[^;]+)", RegexOptions.Multiline);
+                //match both <@<type> "myFile.scss";> and <@<type> url("myFile.scss");> syntax (where supported)
+                var matches = Regex.Matches(content, @"(?<=[@import|@use|@forward](?:[\s]+))(?:(?:\(\w+\)))?\s*(?:url)?(?<url>[^;]+)", RegexOptions.Multiline);
                 foreach (Match match in matches)
                 {
                     var importedfiles = GetFileInfos(info, match);
