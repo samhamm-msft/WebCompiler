@@ -5,7 +5,7 @@ using WebCompiler;
 [assembly: AssemblyTitle("Web Compiler")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Mads Kristensen")]
+[assembly: AssemblyCompany("Jason Moore")]
 [assembly: AssemblyProduct("Web Compiler")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

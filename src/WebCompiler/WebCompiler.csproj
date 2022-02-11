@@ -5,13 +5,16 @@
     <TargetFrameworks>net4.8;netstandard2.1;netcoreapp3.1</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <Title>Web Compiler</Title>
-    <PackageId>BuildWebCompiler</PackageId>
+    <PackageId>BuildWebCompiler2022</PackageId>
 
     <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <!-- forces SDK to copy dependencies into build output to make packing easier -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Authors>Jason Moore</Authors>
+    <RepositoryUrl>https://github.com/failwyn/WebCompiler</RepositoryUrl>
+    <Version>1.14.3</Version>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Node\prepare.cmd" />

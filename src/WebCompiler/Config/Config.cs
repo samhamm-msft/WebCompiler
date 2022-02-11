@@ -49,7 +49,7 @@ namespace WebCompiler
         public bool SourceMap { get; set; }
 
         /// <summary>
-        /// If true a source map file is generated for the file types that support it.
+        /// If true a Node Sass will be used for SASS and SCSS files.
         /// </summary>
         [JsonProperty("useNodeSass")]
         public bool UseNodeSass { get; set; }
