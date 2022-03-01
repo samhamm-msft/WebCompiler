@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace WebCompiler
 {
     class SassDependencyResolver : DependencyResolverBase
     {
+        private Regex importsReg = new Regex(@"(?<=@import|@use|@forward(?:[\s]+))(?:(?:\(\w+\)))?\s*(?:url)?(?<url>[^;]+)", RegexOptions.Compiled|RegexOptions.Multiline);
+        private static Regex filesReg = new Regex(@"(?:(?!\bas\b|\bwith\b)[\s\S])*", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         public override string[] SearchPatterns
         {
             get { return new[] { "*.scss", "*.sass" }; }
@@ -50,8 +54,7 @@ namespace WebCompiler
                 string content = File.ReadAllText(info.FullName);
 
                 //match both <@<type> "myFile.scss";> and <@<type> url("myFile.scss");> syntax (where supported)
-                var matches = Regex.Matches(content, @"(?<=@import|@use|@forward(?:[\s]+))(?:(?:\(\w+\)))?\s*(?:url)?(?<url>[^;]+)", RegexOptions.Multiline);
-                foreach (Match match in matches)
+                foreach (Match match in importsReg.Matches(content))
                 {
                     var importedfiles = GetFileInfos(info, match);
 
@@ -98,7 +101,12 @@ namespace WebCompiler
 
         private static IEnumerable<FileInfo> GetFileInfos(FileInfo info, System.Text.RegularExpressions.Match match)
         {
-            string url = match.Groups["url"].Value.Replace("'", "\"").Replace("(", "").Replace(")", "").Replace(";", "").Trim();
+            var url = filesReg.Matches(match.Groups["url"].Value)
+                .OfType<Match>()
+                .FirstOrDefault()?
+                .Value
+                .Replace("'", "\"").Replace("(", "").Replace(")", "").Replace(";", "") ?? string.Empty;
+
             var list = new List<FileInfo>();
 
             foreach (string name in url.Split(new[] { "\"," }, StringSplitOptions.RemoveEmptyEntries))
