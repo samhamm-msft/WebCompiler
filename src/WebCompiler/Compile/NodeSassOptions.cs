@@ -98,6 +98,7 @@ namespace WebCompiler
         /// <summary>
         /// Precision
         /// </summary>
+        [JsonProperty("precision")]
         public int Precision { get; set; } = 5;
 
         /// <summary>
