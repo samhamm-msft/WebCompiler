@@ -90,6 +90,10 @@
     <None Include="artifacts\less\circrefa.less" />
     <None Include="artifacts\less\circrefb.less" />
     <None Include="artifacts\lessconfigLegacyStrictMath.json" />
+    <None Include="artifacts\options\scss\scssconfigloadpaths.json" />
+    <None Include="artifacts\options\scss\scssconfigsourcemapurlsabsolute.json" />
+    <None Include="artifacts\options\scss\scssconfigsourcemapurlsrelative.json" />
+    <None Include="artifacts\options\scss\scssconfigsourcemap.json" />
     <None Include="artifacts\scss\sub\foo.scss" />
     <None Include="artifacts\stylusconfig.json" />
     <None Include="artifacts\less\sub\relative.less" />

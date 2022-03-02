@@ -1,6 +1,6 @@
-﻿{
+{
   "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Schema for bundleconfig.json files",
+  "description": "Schema for compilerconfig.json files",
 
   "type": "object",
 
@@ -74,6 +74,32 @@
     },
 
     "sass": {
+      "description": "Specify options for the compiler.",
+      "type": "object",
+      "properties": {
+        "loadPaths": {
+          "description": "Scss only. Paths to look for imported files",
+          "type": "string"
+        },
+        "sourceMap": {
+          "description": "Embed the entire contents of the Sass files that contributed to the generated CSS in the source map.",
+          "type": "boolean",
+          "default": false
+        },
+        "sourceMapUrls": {
+          "description": "Controls how the source maps that Sass generates link back to the Sass files that contributed to the generated CSS. relative or absolute",
+          "type": "string",
+          "default": "relative"
+        },
+        "style": {
+          "description": "Controls the output style of the resulting CSS. expanded or compressed",
+          "type": "string",
+          "default": "relative"
+        }
+      }
+    },
+
+    "nodesass": {
       "description": "Specify options for the compiler.",
       "type": "object",
       "properties": {
@@ -157,7 +183,7 @@
         }
       }
     },
-    
+
     "handlebars": {
       "description": "Specify options for the compiler.",
       "type": "object",

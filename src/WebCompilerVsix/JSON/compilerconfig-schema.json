@@ -20,6 +20,21 @@
     },
 
 
+    "nodeSassOptions": {
+      "properties": {
+        "inputFile": {
+          "pattern": "\\.(scss|sass)$"
+        },
+        "options": {
+          "$ref": "compilerdefaults-schema.json#/definitions/nodesass"
+        },
+        "minify": {
+          "$ref": "compilerdefaults-schema.json#/definitions/cssMinify"
+        }
+      }
+    },
+
+
     "sassOptions": {
       "properties": {
         "inputFile": {
@@ -86,7 +101,7 @@
         }
       }
     },
-    
+
     "handlebarsOptions": {
       "properties": {
         "inputFile": {
@@ -129,11 +144,17 @@
           "description": "DEPRECATED! Use 'options/sourceMap' instead.",
           "type": "boolean",
           "default": false
+        },
+        "useNodeSass": {
+          "description": "Use Node Sass instead of Dart Sass.",
+          "type": "boolean",
+          "default": false
         }
       },
 
       "oneOf": [
         { "$ref": "#/definitions/lessOptions" },
+        { "$ref": "#/definitions/nodeSassOptions" },
         { "$ref": "#/definitions/sassOptions" },
         { "$ref": "#/definitions/stylusOptions" },
         { "$ref": "#/definitions/coffeeScriptOptions" },

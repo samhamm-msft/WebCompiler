@@ -9,6 +9,7 @@ namespace WebCompiler
 {
     class SassCompiler : ICompiler
     {
+        private static char[] separators = new char[] { ';', ',' };
         private static Regex _errorRx = new Regex("(?<message>.+) on line (?<line>[0-9]+), column (?<column>[0-9]+)", RegexOptions.Compiled);
         private string _path;
         private string _output = string.Empty;
@@ -128,7 +129,17 @@ namespace WebCompiler
             SassOptions options = SassOptions.FromConfig(config);
 
             if (options.SourceMap || config.SourceMap)
+            {
                 arguments.Append(" --embed-source-map");
+                if (!options.SourceMapUrls.Equals(SassSourceMapUrls.Relative.ToString().ToLowerInvariant(), StringComparison.OrdinalIgnoreCase))
+                {
+                    arguments.Append($" --source-map-urls={options.SourceMapUrls.ToLowerInvariant()}");
+                }
+            }
+            else
+            {
+                arguments.Append(" --no-source-map");
+            }
 
             if (options.Quiet)
                 arguments.Append(" --quiet");
@@ -136,12 +147,11 @@ namespace WebCompiler
             if (options.QuietDeps)
                 arguments.Append(" --quiet-deps");
 
-            arguments.Append(" --precision=" + options.Precision);
             arguments.Append(" --style=" + options.Style.ToString().ToLowerInvariant());
 
             if (options.LoadPaths != null)
             {
-                foreach (string loadPath in options.LoadPaths)
+                foreach (string loadPath in options.LoadPaths.Split(separators, System.StringSplitOptions.RemoveEmptyEntries))
                     arguments.Append(" --load-path=" + loadPath);
             }
 

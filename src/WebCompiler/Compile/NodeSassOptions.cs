@@ -60,7 +60,7 @@ namespace WebCompiler
         /// </summary>
         protected override string CompilerFileName
         {
-            get { return "sass"; }
+            get { return "nodesass"; }
         }
 
         /// <summary>
