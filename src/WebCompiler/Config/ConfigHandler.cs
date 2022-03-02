@@ -64,6 +64,7 @@ namespace WebCompiler
                 {
                     less = new LessOptions(),
                     sass = new SassOptions(),
+                    nodesass = new NodeSassOptions(),
                     stylus = new StylusOptions(),
                     babel = new BabelOptions(),
                     coffeescript = new IcedCoffeeScriptOptions(),

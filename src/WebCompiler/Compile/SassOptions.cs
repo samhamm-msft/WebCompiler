@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 
 namespace WebCompiler
@@ -8,8 +8,6 @@ namespace WebCompiler
     /// </summary>
     public class SassOptions : BaseOptions<SassOptions>
     {
-        private readonly char[] separators = new char[] { ';', ',' };
-
         /// <summary> Creates a new instance of the class.</summary>
         public SassOptions()
         { }
@@ -27,14 +25,18 @@ namespace WebCompiler
 
             string loadPaths = GetValue(config, "loadPaths");
             if (loadPaths != null)
-                LoadPaths = loadPaths.Split(separators, System.StringSplitOptions.RemoveEmptyEntries);
+                LoadPaths = loadPaths;
 
             string style = GetValue(config, "style");
-            if (style != null && Enum.TryParse(style.ToString(), true, out SassStyle styleValue))
-                Style = styleValue;
+            if (style != null && Enum.TryParse(style, true, out SassStyle _))
+                Style = style;
 
-            if (int.TryParse(GetValue(config, "precision"), out int precision))
-                Precision = precision;
+            if (bool.TryParse(GetValue(config, "sourceMap"), out bool sourceMap))
+                SourceMap = sourceMap;
+
+            string sourceMapUrls = GetValue(config, "sourceMapUrls");
+            if (sourceMapUrls != null && Enum.TryParse(sourceMapUrls, true, out SassSourceMapUrls _))
+                SourceMapUrls = sourceMapUrls;
 
             if (bool.TryParse(GetValue(config, "quietDeps"), out bool quietDeps))
                 QuietDeps = quietDeps;
@@ -59,30 +61,37 @@ namespace WebCompiler
         /// Paths to look for imported files
         /// </summary>
         [JsonProperty("loadPaths")]
-        public string[] LoadPaths { get; set; } = new string[0];
+        public string LoadPaths { get; set; } = string.Empty;
 
         /// <summary>
         /// Type of output style
         /// </summary>
         [JsonProperty("style")]
-        public SassStyle Style { get; set; } = SassStyle.Expanded;
+        public string Style { get; set; } = SassStyle.Expanded.ToString().ToLowerInvariant();
 
         /// <summary>
-        /// Precision
+        /// SourceMapUrls
         /// </summary>
-        [JsonProperty("precision")]
-        public int Precision { get; set; } = 10;
+        [JsonProperty("sourceMapUrls")]
+        public string SourceMapUrls { get; set; } = SassSourceMapUrls.Relative.ToString().ToLowerInvariant();
+
+        /// <summary>
+        /// This option allows you to re-write URL's in imported files so that the URL is always
+        /// relative to the base imported file.
+        /// </summary>
+        [JsonProperty("relativeUrls")]
+        public bool RelativeUrls { get; set; } = true;
 
         /// <summary>
         /// Quiet
         /// </summary>
-        [JsonProperty("quiet")]
+        [JsonIgnore]
         public bool Quiet { get; set; } = true;
 
         /// <summary>
         /// QuietDeps
         /// </summary>
-        [JsonProperty("quietDeps")]
+        [JsonIgnore]
         public bool QuietDeps { get; set; } = true;
     }
 
@@ -90,5 +99,11 @@ namespace WebCompiler
     {
         Expanded,
         Compressed
+    }
+
+    public enum SassSourceMapUrls
+    {
+        Relative,
+        Absolute
     }
 }

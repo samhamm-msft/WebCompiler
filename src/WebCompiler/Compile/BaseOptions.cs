@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,6 +23,12 @@ namespace WebCompiler
             {
                 JObject json = JObject.Parse(File.ReadAllText(defaultFile));
                 var jsonOptions = json["compilers"][options.CompilerFileName];
+
+                // backwards compatibility for default files that have not been updated
+                if(jsonOptions == null && options.CompilerFileName.Equals("nodesass", StringComparison.OrdinalIgnoreCase))
+                {
+                    jsonOptions = json["compilers"]["sass"];
+                }
 
                 if (jsonOptions != null)
                     options = JsonConvert.DeserializeObject<T>(jsonOptions.ToString());
