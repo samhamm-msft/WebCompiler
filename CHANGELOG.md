@@ -1,9 +1,6 @@
 # Roadmap
 
-- [ ] Generate gulpfile.js from compilerconfig.json (#34)
-- [ ] Preview window (#6)
-- [ ] File globbing pattern support (#49)
-- [ ] Run compilers from a node server
+- [ ] 
 
 Features that have a checkmark are complete and available for
 download in the
@@ -12,7 +9,47 @@ download in the
 # Changelog
 
 These are the changes to each version that has been released
+on the official Visual Studio extension gallery.These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+**2022-03-02**
+
+## 1.14.5
+- [x] More versions of the @use syntax now trigger compilation
+- [x] Build Targets now has the correct file location for the WebCompiler.dll
+- [x] Added a section in webcompiler.json.defaults for Node Sass defaults
+      This requires the following changes to be made to the compilers section of the defaults file
+
+      "sass": {
+        "autoPrefix": "",
+        "loadPaths": "",
+        "style": "expanded",
+        "sourceMapUrls": "relative",
+        "relativeUrls":  true,
+        "sourceMap": false
+      },
+      "nodesass": {
+        "autoPrefix": "",
+        "includePath": "",
+        "indentType": "space",
+        "indentWidth": 2,
+        "outputStyle": "nested",
+        "precision": 5,
+        "relativeUrls": true,
+        "sourceMapRoot": "",
+        "lineFeed": "",
+        "sourceMap": false
+    }
+
+**2022-03-12**
+
+## 1.14.4
+- [x] Fixed regular expression for implementing @import, @use, and @forward (#25)(#28)
+
+**2022-03-11**
+
+## 1.14.3
+- [x] Updated nuget package for CompileOnBuild (#22)(#26)
 
 **2021-11-30**
 
