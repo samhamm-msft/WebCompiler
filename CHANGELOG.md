@@ -14,6 +14,9 @@ on the official Visual Studio extension gallery.
 
 **2022-03-02**
 
+## 1.14.6
+- [x] Support old default value for loadPaths
+
 ## 1.14.5
 - [x] More versions of the @use syntax now trigger compilation
 - [x] Build Targets now has the correct file location for the WebCompiler.dll
