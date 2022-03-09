@@ -30,8 +30,9 @@ namespace WebCompiler
                     jsonOptions = json["compilers"]["sass"];
                 }
 
+                // backwards compatibility with old default value for loadPaths
                 if (jsonOptions != null)
-                    options = JsonConvert.DeserializeObject<T>(jsonOptions.ToString());
+                    options = JsonConvert.DeserializeObject<T>(jsonOptions.ToString().Replace("[]", "\"\""));
             }
 
             options.LoadSettings(config);
