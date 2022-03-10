@@ -15,6 +15,10 @@ on the official Visual Studio extension gallery.
 **2022-03-02**
 
 ## 1.14.6
+- [x] Support old default value for style
+- [x] Fix Compile On Build
+
+## 1.14.6
 - [x] Support old default value for loadPaths
 
 ## 1.14.5
