@@ -131,10 +131,10 @@ namespace WebCompiler
             if (options.SourceMap || config.SourceMap)
             {
                 arguments.Append(" --embed-source-map");
-                if (!options.SourceMapUrls.Equals(SassSourceMapUrls.Relative.ToString().ToLowerInvariant(), StringComparison.OrdinalIgnoreCase))
-                {
-                    arguments.Append($" --source-map-urls={options.SourceMapUrls.ToLowerInvariant()}");
-                }
+                //if (!options.SourceMapUrls.Equals(SassSourceMapUrls.Relative.ToString().ToLowerInvariant(), StringComparison.OrdinalIgnoreCase))
+                //{
+                //    arguments.Append($" --source-map-urls={options.SourceMapUrls.ToLowerInvariant()}");
+                //}
             }
             else
             {
@@ -147,7 +147,8 @@ namespace WebCompiler
             if (options.QuietDeps)
                 arguments.Append(" --quiet-deps");
 
-            arguments.Append(" --style=" + options.Style.ToString().ToLowerInvariant());
+            if (options.Style != null && Enum.TryParse(options.Style, true, out SassStyle style))
+                arguments.Append(" --style=" + style.ToString().ToLowerInvariant());
 
             if (options.LoadPaths != null)
             {

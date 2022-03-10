@@ -28,15 +28,15 @@ namespace WebCompiler
                 LoadPaths = loadPaths;
 
             string style = GetValue(config, "style");
-            if (style != null && Enum.TryParse(style, true, out SassStyle _))
-                Style = style;
+            if (style != null && Enum.TryParse(style, true, out SassStyle _style))
+                Style = _style.ToString().ToLowerInvariant();
 
             if (bool.TryParse(GetValue(config, "sourceMap"), out bool sourceMap))
                 SourceMap = sourceMap;
 
-            string sourceMapUrls = GetValue(config, "sourceMapUrls");
-            if (sourceMapUrls != null && Enum.TryParse(sourceMapUrls, true, out SassSourceMapUrls _))
-                SourceMapUrls = sourceMapUrls;
+            //string sourceMapUrls = GetValue(config, "sourceMapUrls");
+            //if (sourceMapUrls != null && Enum.TryParse(sourceMapUrls, true, out SassSourceMapUrls _))
+            //    SourceMapUrls = sourceMapUrls;
 
             if (bool.TryParse(GetValue(config, "quietDeps"), out bool quietDeps))
                 QuietDeps = quietDeps;
@@ -69,11 +69,11 @@ namespace WebCompiler
         [JsonProperty("style")]
         public string Style { get; set; } = SassStyle.Expanded.ToString().ToLowerInvariant();
 
-        /// <summary>
-        /// SourceMapUrls
-        /// </summary>
-        [JsonProperty("sourceMapUrls")]
-        public string SourceMapUrls { get; set; } = SassSourceMapUrls.Relative.ToString().ToLowerInvariant();
+        ///// <summary>
+        ///// SourceMapUrls
+        ///// </summary>
+        //[JsonProperty("sourceMapUrls")]
+        //public string SourceMapUrls { get; set; } = SassSourceMapUrls.Relative.ToString().ToLowerInvariant();
 
         /// <summary>
         /// This option allows you to re-write URL's in imported files so that the URL is always

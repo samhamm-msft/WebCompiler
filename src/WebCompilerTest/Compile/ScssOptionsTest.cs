@@ -47,20 +47,20 @@ namespace WebCompilerTest
             Assert.AreEqual(true, result.SourceMap);
         }
 
-        [TestMethod, TestCategory("SCSSOptions")]
-        public void SourceMapUrlsRelative()
-        {
-            var configs = ConfigHandler.GetConfigs("../../artifacts/options/scss/scssconfigsourcemapurlsrelative.json");
-            var result = SassOptions.FromConfig(configs.ElementAt(0));
-            Assert.AreEqual(SassSourceMapUrls.Relative.ToString().ToLowerInvariant(), result.SourceMapUrls);
-        }
+        //[TestMethod, TestCategory("SCSSOptions")]
+        //public void SourceMapUrlsRelative()
+        //{
+        //    var configs = ConfigHandler.GetConfigs("../../artifacts/options/scss/scssconfigsourcemapurlsrelative.json");
+        //    var result = SassOptions.FromConfig(configs.ElementAt(0));
+        //    Assert.AreEqual(SassSourceMapUrls.Relative.ToString().ToLowerInvariant(), result.SourceMapUrls);
+        //}
 
-        [TestMethod, TestCategory("SCSSOptions")]
-        public void SourceMapUrlsAbsolute()
-        {
-            var configs = ConfigHandler.GetConfigs("../../artifacts/options/scss/scssconfigsourcemapurlsabsolute.json");
-            var result = SassOptions.FromConfig(configs.ElementAt(0));
-            Assert.AreEqual(SassSourceMapUrls.Absolute.ToString().ToLowerInvariant(), result.SourceMapUrls);
-        }
+        //[TestMethod, TestCategory("SCSSOptions")]
+        //public void SourceMapUrlsAbsolute()
+        //{
+        //    var configs = ConfigHandler.GetConfigs("../../artifacts/options/scss/scssconfigsourcemapurlsabsolute.json");
+        //    var result = SassOptions.FromConfig(configs.ElementAt(0));
+        //    Assert.AreEqual(SassSourceMapUrls.Absolute.ToString().ToLowerInvariant(), result.SourceMapUrls);
+        //}
     }
 }
