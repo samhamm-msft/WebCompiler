@@ -35,7 +35,7 @@
         },
         "math": {
           "description": "LESS only. Specifies which mode Less will use to process the math in your CSS.",
-          "default": "none",
+          "default": "always",
           "enum": ["always", "parens-division", "parens", "strict", "strict-legacy"]
         },
         "sourceMap": {
